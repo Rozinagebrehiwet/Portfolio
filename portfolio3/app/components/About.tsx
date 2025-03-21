@@ -1,86 +1,132 @@
+'use client';
+
 import React from 'react';
-import WordPullUp from "@/components/ui/word-pull-up";
-import BlurIn from '@/components/ui/blur-in';
-import { FadeText } from '@/components/ui/fade-text';
-import SparklesText from "@/components/ui/sparkles-text";
-import BlurFade from '@/components/ui/blur-fade';
+import { Section } from '@/components/ui/section';
+import { Card } from '@/components/ui/card';
+import { FadeIn } from '@/components/ui/animations';
+import { motion } from 'framer-motion';
+import { FaCode, FaPalette, FaUsers, FaRocket } from "react-icons/fa";
+
+const teamMembers = [
+  {
+    name: "John Doe",
+    role: "Lead Developer",
+    image: "/team1.jpg",
+    description: "10+ years of experience in full-stack development and team leadership."
+  },
+  {
+    name: "Jane Smith",
+    role: "UI/UX Designer",
+    image: "/team2.jpg",
+    description: "Passionate about creating intuitive and beautiful user experiences."
+  },
+  {
+    name: "Mike Johnson",
+    role: "Project Manager",
+    image: "/team3.jpg",
+    description: "Expert in agile methodologies and client communication."
+  }
+];
+
+const expertise = [
+  {
+    icon: FaCode,
+    title: "Development",
+    description: "Full-stack development using cutting-edge technologies and best practices."
+  },
+  {
+    icon: FaPalette,
+    title: "Design",
+    description: "Creating beautiful and functional user interfaces that engage users."
+  },
+  {
+    icon: FaUsers,
+    title: "Team Collaboration",
+    description: "Effective communication and teamwork to deliver exceptional results."
+  },
+  {
+    icon: FaRocket,
+    title: "Innovation",
+    description: "Staying ahead of industry trends and implementing modern solutions."
+  }
+];
 
 const About: React.FC = () => {
-    return (
-        <div id='about' className="font-serif mt-72">
-            <WordPullUp className="text-4xl text-neutral-300 mx-16 mb-10 " words='About Us' />
-            <BlurFade delay={0.2} inView>
-                <section className="text-left m-16 max-w-screen-md ">
-                    <BlurIn className="text-neutral-400 text-lg"
-                        word='Discover the exceptional software development services we offer at our company.
-                        From custom web applications to mobile apps and beyond, our team of skilled
-                        developers, designers, and project managers collaborate to bring your digital vision to life.
-                        Discover the exceptional software development services we offer at our company.
-                        From custom web applications to mobile apps and beyond, our team of skilled
-                        developers, designers, and project managers collaborate to bring your digital vision to life.'
-                    />
-                </section>
+  return (
+    <Section
+      id="about"
+      title="About Us"
+      subtitle="Our Story & Team"
+      className="bg-neutral-950/50"
+    >
+      <div className="space-y-16">
+        {/* Introduction */}
+        <FadeIn>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-neutral-400 text-lg leading-relaxed">
+              Discover the exceptional software development services we offer at our company.
+              From custom web applications to mobile apps and beyond, our team of skilled
+              developers, designers, and project managers collaborate to bring your digital vision to life.
+            </p>
+          </div>
+        </FadeIn>
 
-
-                <section className='flex flex-col justify-between space-y-12 mb-24'>
-                    <div className='place-self-end right-0 bg-neutral-900 flex items-center  justify-between rounded-s-2xl w-2/5 h-44'>
-                        <div className='rounded-full mx-3 align-self-center border-2 border-[#7FFF00] w-36 h-36'></div>
-                        <div className='flex-[1]'>
-                            <FadeText className='text-neutral-300 text-lg ' direction='right' text='Team 1' />
-                            <FadeText className='text-neutral-400 text-base mt-2' direction='right' text='Discover the exceptional software development services we offer at our company.' />
-                        </div>
-                    </div>
-                    <div className="relative">
-                        <SparklesText className="absolute top-0 left-1/2 z-20 text-xs text-neutral-300 p-2"
-                            text='Empowering Businesses'
-                        />
-                    </div>
-                    <div className=' flex justify-between items-center'>
-                        <div className='w-1/2 p-12 ml-16 rounded-s-3xl bg-neutral-900'>
-                            <WordPullUp className="text-3xl  text-neutral-300 mb-10" words='Meet the Team' />
-                            <p className="text-neutral-400 max-w-sm">
-                                <FadeText direction='left' framerProps={{ show: { transition: { delay: 0.1 } }, }} text='• Expertise' />
-                                <FadeText direction='left' framerProps={{ show: { transition: { delay: 0.2 } }, }} text='• Design' />
-                                <FadeText direction='left' framerProps={{ show: { transition: { delay: 0.3 } }, }} text='• Development' />
-                                <FadeText direction='left' framerProps={{ show: { transition: { delay: 0.4 } }, }} text='• UX/UI' />
-
-                                <br />
-                                <BlurIn
-                                    word='Unparalleled Services: We bring your software vision to life through a blend of innovation and
-                            collaboration, delivering exceptional results.'/>
-                                <br />
-                                <BlurIn
-                                    word='Our software development expertise spans a wide range of industries, from e-commerce to
-                            finance, healthcare, and more.'/>
-                            </p>
-                        </div>
-                        <div className='absolute right-1/3 bg-neutral-900 rounded-full border-2 w-96 h-96 z-10'>
-                            <div className='rounded-full justify-self-center my-8 shadow-lg shadow-[#7FFF00] w-36 h-36 '></div>
-                            <div className='text-neutral-300 text-lg text-center '>
-                                <FadeText direction='bottom' text='Team 2' />
-                                <FadeText direction='bottom' className='text-neutral-400 text-base mt-2'
-                                    text='Discover the exceptional software development services we offer at our company.' />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='place-self-end right-0 bg-neutral-900 flex items-center  justify-between rounded-s-2xl w-2/5 h-44'>
-                        <div className='text-neutral-300 mx-4 text-lg flex-[1]'>
-                            <FadeText direction='left' text='Team 3' />
-                            <FadeText direction='left' className='text-neutral-400 text-base mt-2'
-                                text='Discover the exceptional software development services we offer at our company.' />
-                        </div>
-                        <div className='rounded-full mx-3 align-self-center border-2 border-[#7FFF00] w-36 h-36'></div>
-                    </div>
-                </section>
-
-
-                <FadeText direction='bottom' className="text-2xl text-neutral-400 mx-4 text-center"
-                    text='Our software development expertise spans a wide range of industries, from e-commerce to
-                    finance, healthcare, and more.'
-                />
-            </BlurFade>
+        {/* Expertise Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {expertise.map((item, index) => (
+            <FadeIn key={item.title} delay={index * 0.1}>
+              <Card
+                icon={<item.icon className="w-8 h-8" />}
+                title={item.title}
+                description={item.description}
+                className="h-full"
+              />
+            </FadeIn>
+          ))}
         </div>
-    );
+
+        {/* Team Section */}
+        <div className="space-y-8">
+          <FadeIn>
+            <h3 className="text-3xl font-bold text-white text-center mb-12">Meet Our Team</h3>
+          </FadeIn>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {teamMembers.map((member, index) => (
+              <FadeIn key={member.name} delay={index * 0.2}>
+                <motion.div
+                  whileHover={{ y: -10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#7FFF00]/10 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
+                  <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 relative z-10">
+                    <div className="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-[#7FFF00] overflow-hidden">
+                      <div className="w-full h-full bg-neutral-800" />
+                    </div>
+                    <h4 className="text-xl font-semibold text-white text-center mb-2">{member.name}</h4>
+                    <p className="text-[#7FFF00] text-center mb-4">{member.role}</p>
+                    <p className="text-neutral-400 text-center">{member.description}</p>
+                  </div>
+                </motion.div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+
+        {/* Mission Statement */}
+        <FadeIn delay={0.6}>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-neutral-400 text-lg leading-relaxed">
+              Our software development expertise spans a wide range of industries, from e-commerce to
+              finance, healthcare, and more. We bring your software vision to life through a blend of
+              innovation and collaboration, delivering exceptional results.
+            </p>
+          </div>
+        </FadeIn>
+      </div>
+    </Section>
+  );
 };
 
 export default About;
