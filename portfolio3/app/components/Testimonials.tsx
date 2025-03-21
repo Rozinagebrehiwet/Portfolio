@@ -1,73 +1,70 @@
+'use client';
+
 import React from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel"
-import BoxReveal from '@/components/ui/box-reveal';
-import { FaStar } from 'react-icons/fa';
-import BlurIn from '@/components/ui/blur-in';
-import BlurFade from '@/components/ui/blur-fade';
+import { Section } from '@/components/ui/section';
+import { FadeIn } from '@/components/ui/animations';
+import { motion } from 'framer-motion';
+import { FaQuoteLeft } from "react-icons/fa";
 
-const Testimonials = () => {
-    const testimonials = [
-        {
-            name: "John Doe",
-            feedback: "The software exceeded our expectations! It's intuitive, reliable, and has drastically improved our workflow efficiency. The team behind it provided exceptional support, promptly addressing any queries we had during setup. We’ve seen measurable growth in productivity and are thrilled with how seamlessly it integrates into our existing systems. Highly recommend this for businesses looking for smart, scalable solutions!",
-            rating: 5,
-            photo: "https://via.placeholder.com/100" // Replace with actual image URL
-        },
-        {
-            name: "Jane Smith",
-            feedback: "We couldn’t be happier with this software! From the moment we implemented it, it was clear that it was designed with user experience and functionality in mind. The interface is sleek and easy to navigate, even for team members who aren’t particularly tech-savvy. The features are robust and tailored to meet the needs of modern businesses.",
-            rating: 4,
-            photo: "https://via.placeholder.com/100" // Replace with actual image URL
-        },
-        {
-            name: "Michael Johnson",
-            feedback: "Thanks to this software, we’ve seen a tangible increase in productivity, enhanced team collaboration, and noticeable improvements in customer satisfaction. It’s been a game-changer for our organization, and we couldn’t recommend it more highly to anyone looking for a smart, scalable, and future-ready solution!",
-            rating: 5,
-            photo: "https://via.placeholder.com/100" // Replace with actual image URL
-        },
-        {
-            name: "Emily Davis",
-            feedback: "The customer support team deserves a special mention. They were available at every step, offering clear guidance during the onboarding process and addressing our questions with patience and expertise. Their commitment to ensuring our success is unmatched, and it shows in the seamless integration we’ve experienced.",
-            rating: 5,
-            photo: "https://via.placeholder.com/100" // Replace with actual image URL
-        },
-    ];
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    role: "CEO, TechStart",
+    image: "/testimonial1.jpg",
+    content: "Working with this team has been transformative for our business. Their expertise in software development and commitment to quality has helped us achieve remarkable results."
+  },
+  {
+    name: "Michael Chen",
+    role: "CTO, InnovateCorp",
+    image: "/testimonial2.jpg",
+    content: "The team's ability to understand our vision and translate it into exceptional software solutions is truly impressive. They're not just developers, they're partners in our success."
+  },
+  {
+    name: "Emily Rodriguez",
+    role: "Product Manager, GrowthLabs",
+    image: "/testimonial3.jpg",
+    content: "Their attention to detail and focus on user experience has helped us create products that our customers love. The results have exceeded our expectations."
+  }
+];
 
-    return (
-        <div id='testimonials' className='mt-72 font-serif '>
-            <div className='bg-[#7FFF00] bg-opacity-25 w-7/12  place-self-center transform -rotate-[15deg] rounded-2xl '>
-                <div className='bg-[#7FFF00] bg-opacity-50  place-self-center transform rotate-[8deg] rounded-2xl'>
-                    <div className='bg-neutral-900 px-16  py-12 place-self-center rounded-2xl transform rotate-[7deg]'>
-                        <div className='text-3xl text-center text-neutral-200 '>Our clients say</div>
-                        <BlurFade delay={0.2} inView>
-                            <Carousel>
-                                <CarouselContent className='text-center text-lg text-neutral-300 mt-8 '>
-                                    {testimonials.map((testimonial, index) => (
-                                        <CarouselItem key={index} >
-                                            <div className='mb-4 space-x-4 flex items-center justify-center'>
-                                                <img src={testimonial.photo} alt={testimonial.name} className='w-24 h-24 rounded-full ' />
-                                                <div>
-                                                    <BoxReveal boxColor='#7FFF00' duration={0.2} className='font-bold'>{testimonial.name}</BoxReveal>
-                                                    <div className='flex'>
-                                                        {[...Array(testimonial.rating)].map((_, i) => (
-                                                            <FaStar key={i} className='text-yellow-500 text-center text-sm' />
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <BlurIn className='italic line-clamp-4 text-base' word={testimonial.feedback} />
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                                <CarouselPrevious />
-                                <CarouselNext />
-                            </Carousel>
-                        </BlurFade>
-                    </div>
+const Testimonials: React.FC = () => {
+  return (
+    <Section
+      id="testimonials"
+      title="Testimonials"
+      subtitle="What Our Clients Say"
+      className="bg-neutral-950/50"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {testimonials.map((testimonial, index) => (
+          <FadeIn key={testimonial.name} delay={index * 0.2}>
+            <motion.div
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="relative group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-[#7FFF00]/10 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
+              <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 relative z-10 h-full">
+                <FaQuoteLeft className="w-8 h-8 text-[#7FFF00] mb-4" />
+                <p className="text-neutral-300 text-lg mb-6 italic">
+                  &ldquo;{testimonial.content}&rdquo;
+                </p>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full border-2 border-[#7FFF00] overflow-hidden">
+                    <div className="w-full h-full bg-neutral-800" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">{testimonial.name}</h4>
+                    <p className="text-[#7FFF00] text-sm">{testimonial.role}</p>
+                  </div>
                 </div>
-            </div>
-        </div>
-    );
-}
+              </div>
+            </motion.div>
+          </FadeIn>
+        ))}
+      </div>
+    </Section>
+  );
+};
 
 export default Testimonials;
