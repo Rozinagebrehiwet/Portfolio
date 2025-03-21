@@ -1,88 +1,139 @@
 "use client";
-import React from 'react'
-import WordPullUp from '@/components/ui/word-pull-up';
-import BlurFade from '@/components/ui/blur-fade';
-import { useForm } from 'react-hook-form';
-const Contact = () => {
+import React, { useState } from 'react';
+import { Section } from '@/components/ui/section';
+import { FadeIn } from '@/components/ui/animations';
+import { motion } from 'framer-motion';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
-    return (
+const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-        <div id='contact' className='flex justify-center items-center mt-72 '>
-            <div className="form-container  font-serif max-w-[700px] mx-12 rounded-xl bg-neutral-900 shadow-2xl shadow-[#7FFF00] p-8 border-t-4 border-white clip-path-[polygon(0_0,_100%_0,_100%_calc(100%-20px),_calc(100%-20px)_100%,_0_100%)]">
-                <WordPullUp className="heading block text-white text-xl font-bold mb-8" words='Get in touch' />
-                <form>
-                    <BlurFade className="form" delay={0.2} inView>
-                        <input
-                            placeholder="Name"
-                            type="text"
-                            className="input text-[#7FFF00] w-full bg-transparent shadow shadow-neutral-300  rounded-xl outline-none py-2 px-5 mb-6  transition-all duration-200 ease-in-out  focus:border-l-8 focus:border-[#7FFF00]"
-                        />
-                        <input
-                            placeholder="Email"
-                            type="email"
-                            className="input text-[#7FFF00] w-full bg-transparent shadow shadow-neutral-300  rounded-xl outline-none py-2 px-5 mb-6  transition-all duration-200 ease-in-out  focus:border-l-8 focus:border-[#7FFF00]"
-                        />
-                        <input
-                            placeholder="Phone number"
-                            type="tel"
-                            className="input text-[#7FFF00] w-full bg-transparent shadow shadow-neutral-300  rounded-xl outline-none py-2 px-5 mb-6  transition-all duration-200 ease-in-out  focus:border-l-8 focus:border-[#7FFF00]"
-                        />
-                        <textarea
-                            placeholder="Tell us about your project..."
-                            rows={10}
-                            cols={30}
-                            id="message"
-                            name="message"
-                            className="textarea w-full py-2 px-5 shadow shadow-neutral-300 rounded-xl  outline-none text-[#7FFF00]  resize-none max-h-[150px] mb-6  transition-all duration-200 ease-in-out   bg-transparent focus:border-l-8 focus:border-[#7FFF00]"
-                        />
-                        <button className="w-full  hover:cursor-pointer  bg-[#7FFF00] p-2 text-black text-center font-bold border border-transparent rounded-xl transition-all duration-200 ease-in-out hover:bg-transparent hover:border-[#7FFF00] hover:text-[#7FFF00]">
-                            Send
-                        </button>
-                    </BlurFade>
-                </form>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted:', formData);
+  };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  return (
+    <Section
+      id="contact"
+      title="Contact"
+      subtitle="Get in Touch"
+      className="bg-neutral-950/50"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {/* Contact Information */}
+        <FadeIn>
+          <div className="space-y-8">
+            <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+            <div className="space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 rounded-full bg-[#7FFF00]/10 flex items-center justify-center flex-shrink-0">
+                  <FaEnvelope className="w-6 h-6 text-[#7FFF00]" />
+                </div>
+                <div>
+                  <h4 className="text-white font-medium mb-1">Email</h4>
+                  <p className="text-neutral-400">contact@example.com</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 rounded-full bg-[#7FFF00]/10 flex items-center justify-center flex-shrink-0">
+                  <FaPhone className="w-6 h-6 text-[#7FFF00]" />
+                </div>
+                <div>
+                  <h4 className="text-white font-medium mb-1">Phone</h4>
+                  <p className="text-neutral-400">+1 (555) 123-4567</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 rounded-full bg-[#7FFF00]/10 flex items-center justify-center flex-shrink-0">
+                  <FaMapMarkerAlt className="w-6 h-6 text-[#7FFF00]" />
+                </div>
+                <div>
+                  <h4 className="text-white font-medium mb-1">Location</h4>
+                  <p className="text-neutral-400">123 Tech Street, Digital City, 12345</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* Contact Form */}
+        <FadeIn delay={0.2}>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-white font-medium mb-2">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-800 rounded-lg text-white focus:outline-none focus:border-[#7FFF00] transition-colors"
+                required
+              />
             </div>
             <div>
-                <BlurFade className="flex-[0.8]" inView>
-                    <div
-                        className="relative bg-black w-[50%] sm:w-[350px] group transition-all duration-700 aspect-video flex items-center justify-center"
-                    >
-                        <div
-                            className="transition-all flex flex-col items-center py-5 justify-start duration-300 group-hover:duration-1000 bg-neutral-200 w-full h-full absolute group-hover:-translate-y-16"
-                        >
-                            <p className="text-xl sm:text-2xl font-semibold text-gray-500 font-serif">
-                                Thank You
-                            </p>
-                            <p className="px-10 text-[10px] sm:text-[12px] text-gray-700">
-                                We appriciate the time you took to consider our website .
-                            </p>
-                            <p className="font-serif text-[10px] sm:text-[12px text-gray-700">
-                                Let's work great together!
-                            </p>
-                            <p className="font-sans text-[10px] text-gray-700 pt-5">From the  Team</p>
-                        </div>
-                        <button
-                            className="seal bg-lime-400 text-black w-10 aspect-square rounded-full z-40 text-[10px] flex items-center justify-center font-semibold [clip-path:polygon(50%_0%,_80%_10%,_100%_35%,_100%_70%,_80%_90%,_50%_100%,_20%_90%,_0%_70%,_0%_35%,_20%_10%)] group-hover:opacity-0 transition-all duration-1000 group-hover:scale-0 group-hover:rotate-180 border-4 border-lime-700"
-                        >
-                            seal
-                        </button>
-                        <div
-                            className="tp transition-all duration-1000 group-hover:duration-100 bg-neutral-800 absolute group-hover:[clip-path:polygon(50%_0%,_100%_0,_0_0)] w-full h-full [clip-path:polygon(50%_50%,_100%_0,_0_0)]"
-                        ></div>
-                        <div
-                            className="lft transition-all duration-700 absolute w-full h-full bg-neutral-900 [clip-path:polygon(50%_50%,_0_0,_0_100%)]"
-                        ></div>
-                        <div
-                            className="rgt transition-all duration-700 absolute w-full h-full bg-neutral-800 [clip-path:polygon(50%_50%,_100%_0,_100%_100%)]"
-                        ></div>
-                        <div
-                            className="btm transition-all duration-700 absolute w-full h-full bg-neutral-900 [clip-path:polygon(50%_50%,_100%_100%,_0_100%)]"
-                        ></div>
-                    </div>
-                </BlurFade>
+              <label htmlFor="email" className="block text-white font-medium mb-2">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-800 rounded-lg text-white focus:outline-none focus:border-[#7FFF00] transition-colors"
+                required
+              />
             </div>
-
-        </div>)
-}
+            <div>
+              <label htmlFor="subject" className="block text-white font-medium mb-2">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-800 rounded-lg text-white focus:outline-none focus:border-[#7FFF00] transition-colors"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-white font-medium mb-2">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4}
+                className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-800 rounded-lg text-white focus:outline-none focus:border-[#7FFF00] transition-colors"
+                required
+              />
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              className="w-full px-6 py-3 bg-[#7FFF00] text-black font-medium rounded-lg hover:bg-[#7FFF00]/90 transition-colors"
+            >
+              Send Message
+            </motion.button>
+          </form>
+        </FadeIn>
+      </div>
+    </Section>
+  );
+};
 
 export default Contact;
