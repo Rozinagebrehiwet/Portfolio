@@ -13,30 +13,66 @@ import Contact from './components/Contact';
 import Footer from './components/Footer'
 import Image from 'next/image';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
-import BlurFade from '@/components/ui/blur-fade';
+import { SmoothScroll } from '@/components/ui/smooth-scroll';
 
-const page = () => {
- 
-
+const Page = () => {
   return (
-    <div className='bg-neutral-950'>
-          <Navbar />
-          <Home />
-          <ParallaxProvider scrollAxis='horizontal' >
-            <Benefits />
-            <Features />
+    <SmoothScroll>
+      <div className='bg-neutral-950 min-h-screen'>
+        <Navbar />
+        
+        <main className="relative">
+          <section id="home" className="min-h-screen">
+            <Home />
+          </section>
+
+          <ParallaxProvider scrollAxis='horizontal'>
+            <section id="benefits" className="min-h-screen">
+              <Benefits />
+            </section>
+            
+            <section id="features" className="min-h-screen">
+              <Features />
+            </section>
           </ParallaxProvider>
-          <Selected />
-          <About />
+
+          <section id="selected" className="min-h-screen">
+            <Selected />
+          </section>
+
+          <section id="about" className="min-h-screen">
+            <About />
+          </section>
+
           <Parallax speed={-100}>
-            <Image src="/stage-light.png" alt='light' width={800} height={500} className='relative opacity-75  left-1/2 transform -translate-y-1/2 -translate-x-1/2' />
+            <div className="relative w-full h-[500px] overflow-hidden">
+              <Image 
+                src="/stage-light.png" 
+                alt='light' 
+                fill
+                className='object-cover opacity-75'
+                priority
+              />
+            </div>
           </Parallax>
-          <Testimonials />
-          <FAQs />
-          <Contact />
-          <Footer />
-        </div>
+
+          <section id="testimonials" className="min-h-screen">
+            <Testimonials />
+          </section>
+
+          <section id="faqs" className="min-h-screen">
+            <FAQs />
+          </section>
+
+          <section id="contact" className="min-h-screen">
+            <Contact />
+          </section>
+        </main>
+
+        <Footer />
+      </div>
+    </SmoothScroll>
   )
 }
 
-export default page
+export default Page
